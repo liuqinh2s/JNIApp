@@ -6,6 +6,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public float m_FOV = 0.0f;
+    public int m_InterpolateType = 0;
+    public int m_MediaType = 0;
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -18,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(dynamicGenerateKey("hello"));
-//        tv.setText(stringFromJNI());
+//        tv.setText(dynamicGenerateKey("hello"));
+        stringFromJNI();
+        tv.setText(m_MediaType+""+m_FOV+m_InterpolateType);
+
     }
 
     //静态注册
@@ -35,4 +41,5 @@ public class MainActivity extends AppCompatActivity {
 
     //测试动态方法Jni
     public native String dynamicGenerateKey(String name);
+
 }

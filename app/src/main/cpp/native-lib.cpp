@@ -3,16 +3,30 @@
 #include <string>
 #include <assert.h>
 
+typedef struct{
+    float m_FOV;
+    int m_InterpolateType;
+    int m_MediaType;
+}CBaseInitPara;
+
 //静态注册
 JNIEXPORT jstring JNICALL
 Java_com_example_liuqinh2s_jniapp_MainActivity_stringFromJNI(
         JNIEnv *env,
-        jobject /* this */) {
-    std::string hello = "Hello from C++";
-    LOGE("static register log ");
-    return env->NewStringUTF(hello.c_str());
+        jobject obj) {
+    LOGE("static register log XXX");
+    jclass clz = env->FindClass("com/example/liuqinh2s/jniapp/MainActivity");
+    jfieldID m_FOV = env->GetFieldID(clz, "m_FOV", "F");
+    jfieldID m_InterpolateType = env->GetFieldID(clz, "m_InterpolateType", "I");
+    jfieldID m_MediaType = env->GetFieldID(clz, "m_MediaType", "I");
+//    jobject obj;
+    env->SetFloatField(obj,m_FOV,5.6);
+    env->SetIntField(obj,m_InterpolateType,2);
+    env->SetIntField(obj,m_MediaType,7);
+    LOGE("static register log XXX");
+    std::string s = "hello native-lib";
+    return env->NewStringUTF(s.c_str());
 }
-
 
 //动态注册
 
@@ -21,6 +35,7 @@ static jstring native_dynamic_key(JNIEnv *env, jobject /* this */){
     std::string s = "hello native-lib";
     return env->NewStringUTF(s.c_str());
 }
+
 
 //函数映射表
 static JNINativeMethod methods[] = {
