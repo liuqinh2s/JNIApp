@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-//        tv.setText(dynamicGenerateKey("hello"));
-        stringFromJNI();
+//        stringFromJNI();
+        dynamicGenerateKey("hello");
         tv.setText(m_MediaType+""+m_FOV+m_InterpolateType);
 
     }
